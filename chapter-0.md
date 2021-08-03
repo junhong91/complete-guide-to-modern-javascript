@@ -15,6 +15,9 @@ console.log(typeof userID); //string
 
 자바스크립트를 엄격한 자료형을 준수하도록 강요하는 type script라는 언어 존재
 
+<br>
+<br>
+
 ## 원시(primitive) 자료형
 
 ---
@@ -63,6 +66,8 @@ console.log(typeof Object.keys(car)[0]);    // string
 car.drive();
 ```
 
+<br>
+
 #### empty object 생성
 빈 객체를 생성하는 방법 2가지
 ```
@@ -80,6 +85,8 @@ console.log(car);   // {color: "red"}
 ```
 
 _dot notation_ 을 사용하여 객체 car에 새 속성 추가
+
+<br>
 
 #### 객체 속성 접근 방법 2가지
 1) _dot notation_
@@ -125,4 +132,137 @@ console.log(cars.key);  // undefined
 console.log(cars['key']);   //undefined
 console.log(cars["key"]);   // california
 ```
+<br>
+
+#### 객체의 복사
+__primitive 자료형__ 과 달리, object를 복사할 때는 _참조(reference)_ 방식이 사용됨  
+
+```
+let car = {
+    color: 'red',
+};
+
+let refCar = car;
+```
+
+여기서 `refCar`는 그 자체로 객체가 아닌, __car에 대한 참조__. 즉, __주소값(address)__ 를 저장함  
+
+```
+let car = {
+    color: 'red',
+};
+let refCar = car;   //reference!
+
+car.wheels = 4;
+console.log(car);   // {color: 'red', wheels: 4}
+console.log(refCar);    // {color:'red', wheels: 4}
+```
+
+항등 연산자(==) 를 이용하든, 완전 항등 연산자(===) 를 이용하든, true가 반환됨  
+즉, 두 객체는 완전하게 동일함
+
+```
+console.log(car == refCar); //true
+console.log(car === refCar);    //true
+```
+
+아래와 같이, 동일한 속성을 가진 객체끼리 비교는 항상 false를 리턴한다
+
+```
+const obj1 = {a: 1};
+const obj2 = {a: 1};
+
+obj1 == obj2;   // false
+obj1 === obj2;  // false
+```
+
+object의 값 복사를 하려면, `assign()` 을 사용해야 함
+
+```
+const car = {
+    color: 'red',
+};
+const secondCar = Object.assign({}, car);
+car.wheels = 4;
+
+console.log(car);   // {color:'red', wheels: 4}
+console.log(secondCar); // {color:'red'}
+```
+
+<br>
+<br>
+
+## array
+
+#### 배열 선언
+> const fruits = ['banana', 'apple', 'orange'];
+
+#### useful method
+
+- `length` : 배열의 길이 리턴  
+- `push()` : 배열의 끝에 값 추가  
+- `unshift()` : 배열의 시작에 값 추가  
+- `pop()` : 배열의 끝 값 제거  
+- `shift()` : 배열의 시작 값 하나 제거
+
+<br>
+<br>
+
+## scope
+- global scope: 코드의 어느 곳에서나 접근 가능
+- block scope: 블록 내부에서만 접근 가능
+
+> 여기서 block이란 _function, loop, {}_ 로 구분되는 모든 영역을 의미함
+
+`var` scope
+```
+var myInt = 1;
+
+if (myInt === 1) {
+    var mySecondInt = 2;
+    console.log(mySecondInt);   //2
+}
+
+console.log(mySecondInt);   //2
+```
+⚠️ `var` 키워드로 선언된 변수 mySecondInt는 _block scope를 가지지 않는다_ 
+
+`let` scope
+```
+var myInt = 1;
+
+if (myInt === 1) {
+    let mySecondInt = 2;
+    console.log(mySecondInt);   //2
+}
+console.log(mySecondInt);   // Uncauht ReferenceError: mySecondInt is not defined
+```
+
+mySecondInt는 `let` 키워드로 선언 되었기 때문에, block scope를 가지므로 에러 발생
+
+<br>
+
+## `this` keyword
+
+```
+const myCar = {
+    color: 'red',
+    logColor: function() {
+        console.log(this.color);
+    },
+};
+myCar.logColor();   // red
+```
+여기서 `this` 키워드는 myCar object를 참조한다  
+
+> `this` 값은 _호출되는 방식에 따라 달라진다._
+
+```
+function logThis() {
+    console.log(this);
+}
+logThis();  // Window {...}
+```
+함수가 __전역 범위에서 호출__ 되었으므로, this값은 Window 객체를 참조함
+
 
