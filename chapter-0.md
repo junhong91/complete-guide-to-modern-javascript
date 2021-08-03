@@ -92,7 +92,7 @@ const car = {
 };
 
 console.log(car.wheels);    // 4
-console.log(car['color]);   // red
+console.log(car['color']);   // red
 ```
 
 왜 접근 방법이 2가지가 존재하는가?  
