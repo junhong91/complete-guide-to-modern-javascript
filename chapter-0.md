@@ -265,4 +265,42 @@ logThis();  // Window {...}
 ```
 함수가 __전역 범위에서 호출__ 되었으므로, this값은 Window 객체를 참조함
 
+#### `bind()`
+`this`값을 수동으로 설정 가능
 
+```
+const myCar = {
+    color: 'red',
+    logColor: function() {
+        console.log(this.color);
+    },
+};
+
+const unboundGetColor = myCar.logColor;
+console.log(unboundGetColor()); // undefined
+const boundGetColor = unboundGetColor.bind(myCar);
+console.log(boundGetColor());   // red
+```
+
+- unboundGetColor가 호출되면, this.color를 찾으려고 하지만,  
+전역 범위의 this가 호출됨  
+- `.bind()`를 사용하여, boundGetColor의 this 키워드가 myCar 객체를 참조함을 알림  
+
+#### `call()`
+
+```
+function Car(maker, color) {
+    this.carMaker = maker;
+    this.carColor = color;
+}
+
+function MyCar(maker, color) {
+    Car.call(this, maker, color);
+    this.age = 5;
+}
+const myNewCar = new MyCar('bmw', 'red');
+console.log(myNewCar.carMaker); // bmw
+console.log(myNewCar.carColor); // red
+```
+`.call()`에 MyCar 객체를 직접 전달  
+this.carMaker가 MyCar의 인수로 전달된 maker가 되도록 함
