@@ -16,7 +16,6 @@ console.log(typeof userID); //string
 자바스크립트를 엄격한 자료형을 준수하도록 강요하는 type script라는 언어 존재
 
 <br>
-<br>
 
 ## 원시(primitive) 자료형
 
@@ -50,7 +49,7 @@ const car = {
 
 object는 `key:value`로 구성된 집합  
 key는 `string` 자료형만 가능  
-value값은 모든 자료형 가능(함수도 가능)  
+value값은 모든 자료형 가능(함수도 가능)
 
 ```
 const car = {
@@ -69,7 +68,9 @@ car.drive();
 <br>
 
 #### empty object 생성
+
 빈 객체를 생성하는 방법 2가지
+
 ```
 1) const car = new Object();
 2) const car = {};
@@ -79,6 +80,7 @@ car.drive();
 이를 _object literal_ 이라고 함
 
 빈 객체를 생성하고, 다음과 같이 새 속성 추가 가능
+
 ```
 car.color = 'red';
 console.log(car);   // {color: "red"}
@@ -89,8 +91,9 @@ _dot notation_ 을 사용하여 객체 car에 새 속성 추가
 <br>
 
 #### 객체 속성 접근 방법 2가지
-1) _dot notation_
-2) _bracket notation_
+
+1. _dot notation_
+2. _bracket notation_
 
 ```
 const car = {
@@ -104,7 +107,7 @@ console.log(car['color']);   // red
 
 왜 접근 방법이 2가지가 존재하는가?  
 두 방법이 완전히 동일하지 않음  
-__space가 있는 속성은 dot notation 사용 불가__
+**space가 있는 속성은 dot notation 사용 불가**
 
 ```
 const car = {
@@ -118,7 +121,7 @@ console.log(car['goes fast']);  //true
 ```
 
 아래와 같이 사용자의 입력을 받아서(scanf),  
-입력 받은 값을 key로 value를 출력 가능  
+입력 받은 값을 key로 value를 출력 가능
 
 ```
 const cars = {
@@ -132,10 +135,12 @@ console.log(cars.key);  // undefined
 console.log(cars['key']);   //undefined
 console.log(cars["key"]);   // california
 ```
+
 <br>
 
 #### 객체의 복사
-__primitive 자료형__ 과 달리, object를 복사할 때는 _참조(reference)_ 방식이 사용됨  
+
+**primitive 자료형** 과 달리, object를 복사할 때는 _참조(reference)_ 방식이 사용됨
 
 ```
 let car = {
@@ -145,7 +150,7 @@ let car = {
 let refCar = car;
 ```
 
-여기서 `refCar`는 그 자체로 객체가 아닌, __car에 대한 참조__. 즉, __주소값(address)__ 를 저장함  
+여기서 `refCar`는 그 자체로 객체가 아닌, **car에 대한 참조**. 즉, **주소값(address)** 를 저장함
 
 ```
 let car = {
@@ -190,31 +195,32 @@ console.log(secondCar); // {color:'red'}
 ```
 
 <br>
-<br>
 
 ## array
 
 #### 배열 선언
+
 > const fruits = ['banana', 'apple', 'orange'];
 
 #### useful method
 
-- `length` : 배열의 길이 리턴  
-- `push()` : 배열의 끝에 값 추가  
-- `unshift()` : 배열의 시작에 값 추가  
-- `pop()` : 배열의 끝 값 제거  
+- `length` : 배열의 길이 리턴
+- `push()` : 배열의 끝에 값 추가
+- `unshift()` : 배열의 시작에 값 추가
+- `pop()` : 배열의 끝 값 제거
 - `shift()` : 배열의 시작 값 하나 제거
 
 <br>
-<br>
 
 ## scope
+
 - global scope: 코드의 어느 곳에서나 접근 가능
 - block scope: 블록 내부에서만 접근 가능
 
 > 여기서 block이란 _function, loop, {}_ 로 구분되는 모든 영역을 의미함
 
 `var` scope
+
 ```
 var myInt = 1;
 
@@ -225,9 +231,11 @@ if (myInt === 1) {
 
 console.log(mySecondInt);   //2
 ```
-⚠️ `var` 키워드로 선언된 변수 mySecondInt는 _block scope를 가지지 않는다_ 
+
+⚠️ `var` 키워드로 선언된 변수 mySecondInt는 _block scope를 가지지 않는다_
 
 `let` scope
+
 ```
 var myInt = 1;
 
@@ -253,7 +261,8 @@ const myCar = {
 };
 myCar.logColor();   // red
 ```
-여기서 `this` 키워드는 myCar object를 참조한다  
+
+여기서 `this` 키워드는 myCar object를 참조한다
 
 > `this` 값은 _호출되는 방식에 따라 달라진다._
 
@@ -263,9 +272,11 @@ function logThis() {
 }
 logThis();  // Window {...}
 ```
-함수가 __전역 범위에서 호출__ 되었으므로, this값은 Window 객체를 참조함
+
+함수가 **전역 범위에서 호출** 되었으므로, this값은 Window 객체를 참조함
 
 #### `bind()`
+
 `this`값을 수동으로 설정 가능
 
 ```
@@ -283,8 +294,8 @@ console.log(boundGetColor());   // red
 ```
 
 - unboundGetColor가 호출되면, this.color를 찾으려고 하지만,  
-전역 범위의 this가 호출됨  
-- `.bind()`를 사용하여, boundGetColor의 this 키워드가 myCar 객체를 참조함을 알림  
+  전역 범위의 this가 호출됨
+- `.bind()`를 사용하여, boundGetColor의 this 키워드가 myCar 객체를 참조함을 알림
 
 #### `call()`
 
@@ -302,5 +313,6 @@ const myNewCar = new MyCar('bmw', 'red');
 console.log(myNewCar.carMaker); // bmw
 console.log(myNewCar.carColor); // red
 ```
+
 `.call()`에 MyCar 객체를 직접 전달  
 this.carMaker가 MyCar의 인수로 전달된 maker가 되도록 함
